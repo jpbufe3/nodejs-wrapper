@@ -139,7 +139,6 @@ NaturalLanguageClassifier.prototype.trainingData = function(params, callback) {
     options: {
       url: '/v1/classifiers/{classifier_id}/training_data',
       method: 'GET',
-      json: true,
       path: params
     },
     requiredParams: ['classifier_id'],
