@@ -126,6 +126,30 @@ NaturalLanguageClassifier.prototype.status = function(params, callback) {
 };
 
 /**
+ * Returns the training status of the classifier
+ */
+NaturalLanguageClassifier.prototype.trainingData = function(params, callback) {
+  params = params || {};
+
+  // #84: use classifier_id not classifier.
+  if (!params.classifier_id)
+    params.classifier_id = params.classifier;
+
+  var parameters = {
+    options: {
+      url: '/v1/classifiers/{classifier_id}/training_data',
+      method: 'GET',
+      json: true,
+      path: params
+    },
+    requiredParams: ['classifier_id'],
+    defaultOptions: this._options
+  };
+
+  return requestFactory(parameters, callback);
+};
+
+/**
  * Retrieves the list of classifiers for the user
  */
 NaturalLanguageClassifier.prototype.list = function(params, callback) {
