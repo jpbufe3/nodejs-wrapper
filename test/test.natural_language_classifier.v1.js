@@ -71,7 +71,7 @@ var emptyData = { text: '' },
 
 describe('natural_language_classifer', function() {
 
-  it('should fail if no parameters are provided for create, classify, status and delete requests', function() {
+  it('should fail if no parameters are provided for create, classify, status training_data, and delete requests', function() {
     natural_language_classifier.classify({}, missingParameter);
     natural_language_classifier.classify(null, missingParameter);
     natural_language_classifier.classify(undefined, missingParameter);
@@ -84,12 +84,16 @@ describe('natural_language_classifer', function() {
     natural_language_classifier.status(null, missingParameter);
     natural_language_classifier.status(undefined, missingParameter);
 
+    natural_language_classifier.trainingData({}, missingParameter);
+    natural_language_classifier.trainingData(null, missingParameter);
+    natural_language_classifier.trainingData(undefined, missingParameter);
+
     natural_language_classifier.remove({}, missingParameter);
     natural_language_classifier.remove(null, missingParameter);
     natural_language_classifier.remove(undefined, missingParameter);
   });
 
-  it('should fail if no classifier is provided for classify, status and delete requests', function() {
+  it('should fail if no classifier is provided for classify, status, trainingData, and delete requests', function() {
 
     natural_language_classifier.classify(emptyData, missingParameter);
     natural_language_classifier.classify(emptyClassifier, missingParameter);
@@ -103,6 +107,12 @@ describe('natural_language_classifer', function() {
     natural_language_classifier.status(undefinedClassifier, missingParameter);
     natural_language_classifier.status(emptyDataClassifier, missingParameter);
     natural_language_classifier.status(nullDataClassifier, missingParameter);
+
+    natural_language_classifier.trainingData(emptyClassifier, missingParameter);
+    natural_language_classifier.trainingData(nullClassifier, missingParameter);
+    natural_language_classifier.trainingData(undefinedClassifier, missingParameter);
+    natural_language_classifier.trainingData(emptyDataClassifier, missingParameter);
+    natural_language_classifier.trainingData(nullDataClassifier, missingParameter);
 
     natural_language_classifier.remove(emptyData, missingParameter);
     natural_language_classifier.remove(emptyClassifier, missingParameter);
@@ -126,10 +136,13 @@ describe('natural_language_classifer', function() {
 
   it('all other good requests should pass', function() {
     natural_language_classifier.status(goodData, goodRequest);
+    natural_language_classifier.trainingData(goodData, goodRequest);
     natural_language_classifier.remove(goodData, goodRequest);
 
     natural_language_classifier.status(goodDataWithClassifierId, goodRequest);
+    natural_language_classifier.trainingData(goodDataWithClassifierId, goodRequest);
     natural_language_classifier.remove(goodDataWithClassifierId, goodRequest);
+
     //list doesn't need params
     natural_language_classifier.list({}, goodRequest);
     natural_language_classifier.list(null, goodRequest);
